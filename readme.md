@@ -5,8 +5,8 @@ Cast free framework for all castable objects
 
 Currents:
 - Array, ArraySlice to Unsafe<Mutable>Pointer
--- let a = [1, 2, 3]
--- let pointer = a.pointer
+    - let a = [1, 2, 3]
+    - let pointer = a.pointer
 
 - UnsafePointer <-> UnsafeMutablePointer
     - let a <- UnsafePointer<Double>
