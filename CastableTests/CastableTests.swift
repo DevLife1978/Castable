@@ -35,10 +35,10 @@ class CastableTests: XCTestCase {
         XCTAssert(a.count == b.count)
         
         let ptrA = a.pointer
-        let ptrB:UnsafePointer<Void> = b.pointer.cast()
+        let ptrB: UnsafeMutablePointer<Void> = b.pointer.cast()
+        let ptrC: UnsafeMutablePointer<Float> = ptrB.mutable()
         
         for i in 0..<a.count {
-            let ptrC: UnsafeMutablePointer<Float> = ptrB.mutable()
             print("ptrA:\(ptrA[i]) == \(ptrC[i]):ptrC")
             XCTAssert(ptrA[i] == ptrC[i])
         }
