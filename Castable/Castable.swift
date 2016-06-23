@@ -16,7 +16,7 @@ protocol UnsafePointerProtocol: NilLiteralConvertible {
     init<Memory>(_ from: UnsafeMutablePointer<Memory>)
     init<Memory>(_ from: UnsafePointer<Memory>)
     var memory: Memory { get }
-    func mutable() -> UnsafeMutablePointer<Memory>
+    func mutable<M>() -> UnsafeMutablePointer<M>
 }
 
 extension UnsafeMutablePointer : UnsafePointerProtocol, Castable{}
@@ -34,12 +34,12 @@ extension UnsafePointerProtocol where Self: Castable {
         }
     }
     
-    func mutable() -> UnsafeMutablePointer<Memory> {
+    func mutable<M>() -> UnsafeMutablePointer<M> {
         switch self {
         case let ptr as UnsafePointer<Memory>:
-            return ptr.cast()
+            return UnsafeMutablePointer<M>(ptr)
         case let ptr as UnsafeMutablePointer<Memory>:
-            return ptr
+            return UnsafeMutablePointer<M>(ptr)
         default:
             return nil
         }
@@ -55,7 +55,7 @@ protocol Pointerable {
 extension Array : Pointerable {}
 extension ArraySlice : Pointerable {
     func array() -> Array<Element> {
-        return self.flatMap({$0})
+        return Array<Element>(self)
     }
 }
 

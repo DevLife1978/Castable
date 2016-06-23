@@ -25,21 +25,22 @@ class CastableTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        var a:[Double] = [Double]()
+        var a:[Float] = [Float]()
         for _ in 0..<10 {
-            a.append(Double(arc4random()))
+            a.append(Float(arc4random_uniform(255)))
         }
-        let b = a[0..<a.count]
+        let b = a[0..<10]
         
         print("a.count:\(a.count) == \(b.count):b.count")
         XCTAssert(a.count == b.count)
         
         let ptrA = a.pointer
-        let ptrB = ptrA.mutable()
+        let ptrB:UnsafePointer<Void> = b.pointer.cast()
         
         for i in 0..<a.count {
-            print("ptrA:\(ptrA[i]) == \(ptrB[i]):ptrB")
-            XCTAssert(ptrA[i] == ptrB[i])
+            let ptrC: UnsafeMutablePointer<Float> = ptrB.mutable()
+            print("ptrA:\(ptrA[i]) == \(ptrC[i]):ptrC")
+            XCTAssert(ptrA[i] == ptrC[i])
         }
     }
     
