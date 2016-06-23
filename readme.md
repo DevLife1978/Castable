@@ -9,8 +9,8 @@ Currents:
 -- let pointer = a.pointer
 
 - UnsafePointer <-> UnsafeMutablePointer
--- let a <- UnsafePointer<Double>
--- let b: UnsafeMutablePointer<Double> = a.cast()
+    - let a <- UnsafePointer<Double>
+    - let b: UnsafeMutablePointer<Double> = a.cast()
 
 Nexts:
 - Umm.. Thinking... please let me know cast free objects that you wants 
