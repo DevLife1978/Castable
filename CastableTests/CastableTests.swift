@@ -31,12 +31,14 @@ class CastableTests: XCTestCase {
         }
         let b = a[0..<a.count]
         
+        print("a.count:\(a.count) == \(b.count):b.count")
         XCTAssert(a.count == b.count)
         
         let ptrA = a.pointer
-        let ptrB: UnsafeMutablePointer<Double> = b.pointer.cast()
+        let ptrB = ptrA.mutable()
         
         for i in 0..<a.count {
+            print("ptrA:\(ptrA[i]) == \(ptrB[i]):ptrB")
             XCTAssert(ptrA[i] == ptrB[i])
         }
     }
