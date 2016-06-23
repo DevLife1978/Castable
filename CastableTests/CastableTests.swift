@@ -29,14 +29,14 @@ class CastableTests: XCTestCase {
         for _ in 0..<10 {
             a.append(Float(arc4random_uniform(255)))
         }
-        let b = a[0..<10]
+        let b = a[0..<a.count]
         
         print("a.count:\(a.count) == \(b.count):b.count")
         XCTAssert(a.count == b.count)
         
         let ptrA = a.pointer
         let ptrB: UnsafeMutablePointer<Void> = b.pointer.cast()
-        let ptrC: UnsafeMutablePointer<Float> = ptrB.mutable()
+        let ptrC: UnsafePointer<Float> = ptrB.cast()
         
         for i in 0..<a.count {
             print("ptrA:\(ptrA[i]) == \(ptrC[i]):ptrC")
